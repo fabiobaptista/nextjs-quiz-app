@@ -1,6 +1,6 @@
 const PageTitle = () => {
   return (
-    <h2>Quiz App</h2>
+    <h1>Quiz App</h1>
   )
 }
 

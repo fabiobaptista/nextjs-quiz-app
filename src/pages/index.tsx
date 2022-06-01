@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -16,6 +16,10 @@ const Home: NextPage = () => {
   const [name, setName] = useState(context.name)
   const [category, setCategory] = useState(context.category)
   
+  // Mounted
+  // useEffect(() => {}, [])
+
+
   function startGame() {
     if(!name) {
       setMsg('Informe o nome do Jogador')
@@ -28,6 +32,7 @@ const Home: NextPage = () => {
     }
 
     setMsg('')
+    
     context.updateName(name)
     context.updateCategory(category)
     route.push('/questions')
@@ -37,20 +42,20 @@ const Home: NextPage = () => {
     <MainContainer>
       <Modal>
         {msg && <Message message={msg}/>}
-        <div className={styles.inputForm}>
+        <div className='inputForm'>
           <span>Jogador:</span>
           <input type='text' value={name} onChange={e => setName(e.target.value)}/>
         </div>
-        <div className={styles.inputForm}>
+        <div className='inputForm'>
           <span>Categoria:</span>
           <select
             defaultValue={category}
             onChange={e => setCategory(e.target.value)}>
-            <option value='0'>Selecione uma Categoria</option>
+            <option value=''>Selecione uma Categoria</option>
             <option value='1'>Outra</option>
           </select>
         </div>
-        <button className={styles.button} onClick={startGame}>Jogar</button>
+        <button className='button' onClick={startGame}>Jogar</button>
       </Modal>
     </MainContainer>
   )

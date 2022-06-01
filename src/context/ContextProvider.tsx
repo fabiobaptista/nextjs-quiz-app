@@ -26,8 +26,10 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
 
   return (
     <AppContext.Provider value={{
+      isBusy: state.isBusy,
       name: state.name,
       category: state.category,
+      updateIsBusy: (value) => updateState('isBusy', value),
       updateName: (value) => updateState('name', value),
       updateCategory: (value) => updateState('category', value),
     }}>
