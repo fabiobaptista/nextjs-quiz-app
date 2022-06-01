@@ -1,0 +1,13 @@
+@import '../mixins/flexbox';
+@import '../variables';
+
+.modal {
+  @include flexbox(column);
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $border-color;
+  width: calc(100vw - 250px);
+  min-width: 500px;
+  min-height: calc(100vh - 250px);
+  min-height: 300px;
+}
