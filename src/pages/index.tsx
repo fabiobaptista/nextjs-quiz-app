@@ -6,6 +6,7 @@ import Modal from '@/components/Modal'
 import styles from '@/styles/pages/index.module.scss'
 import { useAppContext } from '@/context/ContextProvider'
 import Message from '@/components/Message'
+import MainContainer from '@/components/MainContainer'
 
 
 const Home: NextPage = () => {
@@ -31,27 +32,25 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className='container'>
-      <main className='main'>
-        <Modal>
-          {msg && <Message message={msg}/>}
-          <div className={styles.inputForm}>
-            <span>Jogador:</span>
-            <input type='text' value={name} onChange={e => setName(e.target.value)}/>
-          </div>
-          <div className={styles.inputForm}>
-            <span>Categoria:</span>
-            <select
-              defaultValue={category}
-              onChange={e => setCategory(e.target.value)}>
-              <option value='0'>Selecione uma Categoria</option>
-              <option value='1'>Outra</option>
-            </select>
-          </div>
-          <button className={styles.button} onClick={startGame}>Jogar</button>
-        </Modal>
-      </main>
-    </div>
+    <MainContainer>
+      <Modal>
+        {msg && <Message message={msg}/>}
+        <div className={styles.inputForm}>
+          <span>Jogador:</span>
+          <input type='text' value={name} onChange={e => setName(e.target.value)}/>
+        </div>
+        <div className={styles.inputForm}>
+          <span>Categoria:</span>
+          <select
+            defaultValue={category}
+            onChange={e => setCategory(e.target.value)}>
+            <option value='0'>Selecione uma Categoria</option>
+            <option value='1'>Outra</option>
+          </select>
+        </div>
+        <button className={styles.button} onClick={startGame}>Jogar</button>
+      </Modal>
+    </MainContainer>
   )
 }
 
