@@ -17,7 +17,7 @@ type ContextProviderProps = {
 const ContextProvider = ({ children }: ContextProviderProps) => { 
   const [state, setState] = useState(DataContextInitialValues)
 
-  function updateState(prop: string, value: string) {
+  function updateState<T>(prop: string, value: T) {
     setState(s => ({
       ...s,
       [prop]: value,
@@ -29,9 +29,9 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       isBusy: state.isBusy,
       name: state.name,
       category: state.category,
-      updateIsBusy: (value) => updateState('isBusy', value),
-      updateName: (value) => updateState('name', value),
-      updateCategory: (value) => updateState('category', value),
+      updateIsBusy: (value) => updateState<boolean>('isBusy', value),
+      updateName: (value) => updateState<string>('name', value),
+      updateCategory: (value) => updateState<string>('category', value),
     }}>
       {children}
     </AppContext.Provider>
