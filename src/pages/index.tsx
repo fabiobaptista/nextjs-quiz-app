@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
+import { useAppContext } from '@/context/ContextProvider'
+import MainContainer from '@/components/MainContainer'
 import Modal from '@/components/Modal'
+import Message from '@/components/Message'
 
 import styles from '@/styles/pages/index.module.scss'
-import { useAppContext } from '@/context/ContextProvider'
-import Message from '@/components/Message'
-import MainContainer from '@/components/MainContainer'
-
 
 const Home: NextPage = () => {
+  const route = useRouter()
   const context = useAppContext()
   const [msg, setMsg] = useState('')
-  const [name, setName] = useState('')
-  const [category, setCategory] = useState('')
+  const [name, setName] = useState(context.name)
+  const [category, setCategory] = useState(context.category)
   
   function startGame() {
     if(!name) {
@@ -29,6 +30,7 @@ const Home: NextPage = () => {
     setMsg('')
     context.updateName(name)
     context.updateCategory(category)
+    route.push('/questions')
   }
 
   return (
