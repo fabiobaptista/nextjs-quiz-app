@@ -11,7 +11,7 @@ const Questions: NextPage = () => {
   return (
     <MainContainer>
       <Modal>
-        <div onClick={() => route.push('/') }>{context.name}</div>
+        <div onClick={() => route.push('/') }>{context.name} | {context.category}</div>
       </Modal>
     </MainContainer>
   )

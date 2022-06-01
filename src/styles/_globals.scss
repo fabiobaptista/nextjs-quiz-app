@@ -1,7 +1,11 @@
+@import 'variables';
+
 html,
 body {
   padding: 0;
   margin: 0;
+  background-image: $bg-page;
+  font-size: $font-size;
   font-family: $font-family;
 }
 

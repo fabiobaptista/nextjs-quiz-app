@@ -5,9 +5,11 @@
   @include flexbox(column);
   justify-content: center;
   align-items: center;
+  padding: 5rem;
   border: 1px solid $border-color;
-  width: calc(100vw - 250px);
-  min-width: 500px;
+  min-width: 200px;
   min-height: calc(100vh - 250px);
   min-height: 300px;
+  background-color: $bg-content;
+  border-radius: 5px;
 }

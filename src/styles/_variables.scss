@@ -16,10 +16,11 @@ $theme-colors: (
 // General layout
 $font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-$font-size: .8rem;
+$font-size: 1rem;
+$bg-page: linear-gradient(#6cbac9,#29545d);
 $bg-content: #fff;
 $margin-content: .5rem;
 $padding-content: .5rem;
 
 // General border
-$border-color: map-get($theme-colors, primary);
+$border-color: map-get($theme-colors, secondary);

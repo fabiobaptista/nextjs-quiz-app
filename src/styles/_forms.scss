@@ -1,0 +1,25 @@
+@import 'functions';
+@import 'variables';
+@import 'mixins/flexbox';
+
+.inputForm {
+  @include flexbox();
+  width: 100%;
+  margin: 5px;
+  span {
+    flex: 1;
+    margin-right: 10px;
+  }
+  input, select {
+    flex: 2;
+  }
+}
+
+.button {
+  padding: .5rem 2rem;
+  margin: 1rem;
+  background-color: colors(secondary);
+  color: #fff;
+  border: 1px solid colors(secondary);
+  border-radius: 5px;
+}
