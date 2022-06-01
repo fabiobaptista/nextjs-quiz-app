@@ -22,8 +22,6 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       ...s,
       [prop]: value,
     }))
-
-    console.log(prop, value, state)
   }
 
   return (
