@@ -40,7 +40,7 @@ const Home: NextPage = () => {
 
   return (
     <MainContainer>
-      <Modal>
+      <Modal className='alignItemscenter justifyContentCenter'>
         {msg && <Message message={msg}/>}
         <div className='inputForm'>
           <span>Jogador:</span>
