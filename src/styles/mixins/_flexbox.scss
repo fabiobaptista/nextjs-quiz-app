@@ -1,0 +1,5 @@
+@mixin flexbox($direction: 'row') {
+  display: flex;
+  flex-direction: $direction;
+  flex: 1;
+ }
