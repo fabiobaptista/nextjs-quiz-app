@@ -9,11 +9,15 @@
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react",
-    "rootDirs": ["src"],
+    "jsx": "preserve",
+    "rootDirs": [
+      "src"
+    ],
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "*"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,7 +25,14 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "noEmit": true
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": false
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
