@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "jest --passWithNoTests --no-cache --runInBand",
+    "dev": "next dev",
     "test:watch": "npm test -- --watch",
     "jest:clearCache": "jest --clearCache",
-    "dev": "next dev",
+    "test": "jest --passWithNoTests --no-cache --runInBand",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

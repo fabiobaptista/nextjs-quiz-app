@@ -1,8 +1,6 @@
 export interface InputCreateRoundDto {
-  round: {
     playerName: string
     categoryId: number
-  }
 }
 
 export interface OutputCreateRoundDto {

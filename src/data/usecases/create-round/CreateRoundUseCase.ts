@@ -18,8 +18,8 @@ export default class CreateRoundUsecase {
       },
       body: JSON.stringify({
          round: {
-          player_name: input.round.playerName,
-          category_id: input.round.categoryId
+          player_name: input.playerName,
+          category_id: input.categoryId
         }
       })
     })
@@ -30,7 +30,7 @@ export default class CreateRoundUsecase {
       return {
         round: {
           id: result.id,
-          player_name: result.player_name,
+          player_id: result.player_id,
           questions: result.questions
         }
       }
