@@ -1,6 +1,6 @@
 import FetchHttpClient from '../../../infra/http/FetchHttpClient'
 import 'isomorphic-fetch'
-import { InputCreateRoundDto } from '../create-round/CreateRoundDto'
+import { InputCreateRoundDto, OutputCreateRoundDto } from '../create-round/CreateRoundDto'
 import { InputSaveAnswerDto, OutputSaveAnswerDto } from './SaveAnswerDto'
 import SaveAnswerUseCase from './SaveAnswerUseCase'
 
@@ -26,17 +26,16 @@ describe('Test Create Round Use Case', () => {
               ...playerDataMock
           }
       }),
-  })
+    })
 
-  const round:any = reqCreate.body
+    const round:OutputCreateRoundDto = reqCreate.body
 
-  expect(round.round.id).toBeGreaterThan(0)
-  expect(round.round.answers.length).toEqual(0)
-  
+    expect(round.round?.id).toBeGreaterThan(0)
+      
     const input: InputSaveAnswerDto = {
-      roundId: round.round.id,
-      questionId: round.round.questions[0].id,
-      optionId: round.round.questions[0].options[0].id
+      roundId: round.round?.id || 0,
+      questionId: round.round?.questions[0].id || 0,
+      optionId: round.round?.questions[0].options[0].id || 0
     }
 
     const usecase = new SaveAnswerUseCase(urlApi, httpClient)
@@ -44,7 +43,7 @@ describe('Test Create Round Use Case', () => {
     const output: OutputSaveAnswerDto = await usecase.execute(input)
 
     expect(output.answer?.id).toBeGreaterThan(0)
-    expect(output.answer?.option_id).toBe(round.round.questions[0].options[0].id)
+    expect(output.answer?.option_id).toBe(round.round?.questions[0].options[0].id)
   })
 
   test('should not create a round', async () => {
