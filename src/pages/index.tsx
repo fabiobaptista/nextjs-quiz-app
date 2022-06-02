@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { Category } from '@/domain/category'
+import { Round, Question } from '../domain/round'
 
 import { useAppContext } from '@/context/ContextProvider'
 import MainContainer from '@/components/MainContainer'
 import Modal from '@/components/Modal'
 import Message from '@/components/Message'
 
-import Category from '@/domain/categories/Categories'
 import UseCasesFactory from '@/factory/UseCasesFactory'
 
+const loadGategoriesUseCase = UseCasesFactory.createLoadCategories()
+const createRoundUsesCase = UseCasesFactory.createCreateRound()
+
 const Home: NextPage = () => {
-  const loadGategoriesUsecase = UseCasesFactory.createLoadCategories()
   const route = useRouter()
   const {updateIsBusy, ...context} = useAppContext()
 
@@ -24,7 +27,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     (async () => {
       updateIsBusy(true)
-      const data = await loadGategoriesUsecase.execute({})
+      const data = await loadGategoriesUseCase.execute({})
       setCategories(data.categories)
       if(context.category) {
         setCategory(context.category)
@@ -48,7 +51,34 @@ const Home: NextPage = () => {
     
     context.updateName(name)
     context.updateCategory(category)
-    route.push('/questions')
+
+    const dataRound = await createRoundUsesCase.execute({
+      playerName: name,
+      categoryId: +category
+    })
+
+    // TODO - create coverter to Round
+    if(dataRound.round) {
+      const round: Round = {
+        id: dataRound.round.id,
+        playerId: dataRound.round.player_id,
+        questions: dataRound.round.questions.map(q => ({
+          id: q.id,
+          description: q.description,
+          options: q.options.map(o => ({
+            id: o.id,
+            label: o.label,
+          }))
+        })),
+      }
+      
+      context.updatePlayer(round.playerId)
+      context.updateRound(round.id)
+      console.log(round)
+      route.push(`${round.id}/questions`)
+    } else {
+      setMsg('Não foi possível iniciar o Quiz')
+    }
   }
 
   return (
