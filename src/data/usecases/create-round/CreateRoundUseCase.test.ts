@@ -28,19 +28,15 @@ describe('Test Create Round Use Case', () => {
     
   })
 
-  // test('should returns empty when not create round', async () => {
-  //   const httpClient = httpClientMock()
-  //   jest.spyOn(httpClient, 'request')
-  //     .mockReturnValue(Promise.resolve({
-  //       statusCode: 200,
-  //       body: {}
-  //     }))
+  test('should not create a round', async () => {
 
-  //   const input: InputCreateRoundDto = inputRoundMock
-  //   const usecase = new CreateRoundUseCase('http://fake.com', httpClient)
+    const input: InputCreateRoundDto = inputRoundMock
+    const usecase = new CreateRoundUseCase(urlApi, httpClient)
 
-  //   const output: OutputCreateRoundDto = await usecase.execute(input)
+    input.round.categoryId = 0
 
-  //   expect(output).toStrictEqual({})
-  // })
+    const output: OutputCreateRoundDto = await usecase.execute(input)
+
+    expect(output).toStrictEqual({})
+  })
 })
