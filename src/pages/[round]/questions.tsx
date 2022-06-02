@@ -5,39 +5,80 @@ import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
 
 import styles from '@/styles/pages/questions.module.scss'
-import { useEffect } from 'react'
-import { runInContext } from 'vm'
+import { useEffect, useState } from 'react'
+import UseCasesFactory from '@/factory/UseCasesFactory'
+import { Question } from '@/domain/round'
+
+const loadRoundUseCase = UseCasesFactory.createLoadRound()
 
 const Questions: NextPage = () => {
   const route = useRouter()
-  const context = useAppContext()
+  const {updateIsBusy, ...context} = useAppContext()
 
+  const [msg, setMsg] = useState('')
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [questions, setQuestions] = useState<Question[]>([])
+
+  // Mounted
   useEffect(() => {
-    // ensure that round id is provided
-    const roundId = route.query.round || ''
-    if(!roundId && !isNaN(+roundId)) {
-      route.push('/')
-    }
+    (async () => {
+      updateIsBusy(true)
 
-    
+      // ensure that round id is provided
+      const roundId = route.query.round || ''
+      if(!roundId && !isNaN(+roundId)) {
+        route.push('/')
+      }
+      const data = await loadRoundUseCase.execute({ roundId: +roundId })
+      
+      console.log(data)
+      const questions: Question[] = data.round?.questions.map(q => ({
+        id: q.id,
+        description: q.description,
+        options: q.options.map(o => ({
+          id: o.id,
+          label: o.label
+        }))
+      })) || []
+
+      // ensure that round is received
+      if(!questions.length) {
+        route.push('/')
+      }
+
+      setQuestions(questions)
+
+      updateIsBusy(false)
+    })()
   }, [])
+
+  function handleAnswerQuestion(optionId: number) {
+    updateIsBusy(true)
+    console.log(optionId)
+    if(currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1)
+    } else {
+      route.push('/result')
+    }
+    updateIsBusy(false)
+  }
 
   return (
     <MainContainer>
       <Modal className='alignItemsStretch'>
         <div className={`${styles.cardHeader}` }>
-          <div>1/3</div>
+          <div>{currentQuestion+1}/{questions.length}</div>
           <div>Rodada: {route.query.round}</div>
           <div>Certas: 0</div>
         </div>
         <div className={styles.cardQuestion}>
-          Petinha por que você matou o Curirim?
+          {questions[currentQuestion]?.description}
         </div>
         <div className={styles.cardAnswers}>
-          <button onClick={() => route.push('/result')}>resp 1</button>
-          <button>resp 2</button>
-          <button>resp 3</button>
-          <button>resp 4</button>
+          {questions[currentQuestion]?.options.map(o => (
+            <button key={o.id} onClick={() => handleAnswerQuestion(o.id) }>{o.label}</button>
+          ))}
+          
         </div>
       </Modal>
     </MainContainer>
