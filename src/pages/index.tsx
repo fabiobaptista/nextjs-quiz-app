@@ -7,20 +7,33 @@ import MainContainer from '@/components/MainContainer'
 import Modal from '@/components/Modal'
 import Message from '@/components/Message'
 
-import styles from '@/styles/pages/index.module.scss'
+import Category from '@/domain/categories/Categories'
+import UseCasesFactory from '@/factory/UseCasesFactory'
 
 const Home: NextPage = () => {
+  const loadGategoriesUsecase = UseCasesFactory.createLoadCategories()
   const route = useRouter()
-  const context = useAppContext()
+  const {updateIsBusy, ...context} = useAppContext()
+
   const [msg, setMsg] = useState('')
+  const [categories, setCategories] = useState<Category[]>([])
   const [name, setName] = useState(context.name)
   const [category, setCategory] = useState(context.category)
   
   // Mounted
-  // useEffect(() => {}, [])
+  useEffect(() => {
+    (async () => {
+      updateIsBusy(true)
+      const data = await loadGategoriesUsecase.execute({})
+      setCategories(data.categories)
+      if(context.category) {
+        setCategory(context.category)
+      }
+      updateIsBusy(false)
+    })()
+  }, [])
 
-
-  function startGame() {
+  async function startGame() {
     if(!name) {
       setMsg('Informe o nome do Jogador')
       return
@@ -49,10 +62,14 @@ const Home: NextPage = () => {
         <div className='inputForm'>
           <span>Categoria:</span>
           <select
-            defaultValue={category}
+            value={category}
             onChange={e => setCategory(e.target.value)}>
-            <option value=''>Selecione uma Categoria</option>
-            <option value='1'>Outra</option>
+            <>
+              <option value='' key='0'>Selecione uma Categoria</option>
+              {categories.map(c => ( 
+                <option value={c.id} key={c.id}>{c.name}</option> 
+              ))}
+            </>
           </select>
         </div>
         <button className='button' onClick={startGame}>Jogar</button>
