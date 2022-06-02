@@ -8,32 +8,6 @@ const inputRoundMock: InputSaveAnswerDto = {
     optionId: 1
 }
 
-const questions1Mock: OutpuSaveAnswerQuestionDto = {
-  id: 1,
-  description: 'Question 1',
-  options: [
-    {
-      id: 1,
-      label: 'Option 1'
-    },
-  ]
-}
-
-const questions2Mock: OutpuSaveAnswerQuestionDto = {
-  id: 2,
-  description: 'Question 2',
-  options: [
-    {
-      id: 2,
-      label: 'Option 2'
-    },
-    {
-      id: 3,
-      label: 'Option 3'
-    },
-  ]
-}
-
 const outputAnswermock: OutputSaveAnswerAnswerDto = {
   id: 1,
   question_id: 1,
@@ -42,17 +16,7 @@ const outputAnswermock: OutputSaveAnswerAnswerDto = {
 }
 
 const outputSaveAnswerMock: OutputSaveAnswerDto = {
-  round: {
-    id: 1,
-    player_id: 1,
-    questions: [
-      questions1Mock,
-      questions2Mock
-    ],
-    answers: [
-      outputAnswermock
-    ]
-  }
+  answer: outputAnswermock
 }
 
 const httpClientMock = (): HttpClient => {
@@ -75,11 +39,10 @@ describe('Test Save Answer Use Case', () => {
 
     const output: OutputSaveAnswerDto = await usecase.execute(input)
 
-    expect(output).toBeDefined()
-    expect(output.round?.id).toBe(outputSaveAnswerMock.round?.id)
-    expect(output.round?.questions.length).toBe(outputSaveAnswerMock.round?.questions.length)
-    expect(output.round?.answers.length).toBe(outputSaveAnswerMock.round?.answers.length)
-    expect(output.round?.answers[0].id).toBe(outputSaveAnswerMock.round?.answers[0].id)
+    expect(output.answer?.id).toBe(outputSaveAnswerMock.answer?.id)
+    expect(output.answer?.question_id).toBe(outputSaveAnswerMock.answer?.question_id)
+    expect(output.answer?.option_id).toBe(outputSaveAnswerMock.answer?.option_id)
+    expect(output.answer?.correct).toBe(outputSaveAnswerMock.answer?.correct)
   })
 
   test('should returns empty when not save answer', async () => {
