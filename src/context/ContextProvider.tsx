@@ -29,9 +29,13 @@ const ContextProvider = ({ children }: ContextProviderProps) => {
       isBusy: state.isBusy,
       name: state.name,
       category: state.category,
+      playerId: state.playerId,
+      roundId: state.roundId,
       updateIsBusy: (value) => updateState<boolean>('isBusy', value),
       updateName: (value) => updateState<string>('name', value),
       updateCategory: (value) => updateState<string>('category', value),
+      updatePlayer: (value) => updateState<number>('playerId', value),
+      updateRound: (value) => updateState<number>('roundId', value),
     }}>
       {children}
     </AppContext.Provider>
