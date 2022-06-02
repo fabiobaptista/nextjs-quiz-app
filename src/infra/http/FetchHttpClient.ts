@@ -11,14 +11,21 @@ export default class FetchHttpClient implements HttpClient {
     let response: Response
 
     try {
-      response = await this.fetch(data.url)
-
+      response = await this.fetch(
+        data.url,
+        {
+          method: data.method.toUpperCase(),
+          headers: data.headers,
+          body: data.body
+        }
+      )
       switch(response.status) {
-        case 200: 
+        case 200:
+        case 201:  
           body = await response.json()
         break
         case 404: 
-          body = ''
+          body = response.json()
         break
         default:
           body = ''
