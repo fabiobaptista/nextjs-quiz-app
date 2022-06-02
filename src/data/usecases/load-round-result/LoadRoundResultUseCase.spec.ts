@@ -39,25 +39,23 @@ describe('Test Load Round Result Use Case', () => {
     expect(output).toStrictEqual({})
   })
 
-  // test('should list all categories', async () => {
-  //   const httpClient = httpClientMock()
-  //   jest.spyOn(httpClient, 'request')
-  //     .mockReturnValue(Promise.resolve({
-  //       statusCode: 200,
-  //       body: outpuCategoriesMock
-  //     }))
+  test('should list all categories', async () => {
+    const httpClient = httpClientMock()
+    jest.spyOn(httpClient, 'request')
+      .mockReturnValue(Promise.resolve({
+        statusCode: 200,
+        body: outputRoundResultMock
+      }))
 
-  //   const input: InputLoadCategoriesDto = { }
-  //   const usecase = new LoadCategoriesUseCase('http://fake.com', httpClient)
+    const input: InputLoadRoundResultDto = inputRoundResultMock
+    const usecase = new LoadRoundResultUseCase('http://fake.com', httpClient)
 
-  //   const output: OutputLoadCategoriesDto = await usecase.execute(input)
+    const output: OutputLoadRoundResultDto = await usecase.execute(input)
 
-  //   expect(output.categories.length).toBe(2)
-
-  //   expect(output.categories[0].id).toBe(category1.id)
-  //   expect(output.categories[0].name).toBe(category1.name)
-    
-  //   expect(output.categories[1].id).toBe(category2.id)
-  //   expect(output.categories[1].name).toBe(category2.name)
-  // })
+    expect(output.round?.id).toBe(outputRoundResultMock.round?.id)
+    expect(output.round?.player_id).toBe(outputRoundResultMock.round?.player_id)
+    expect(output.round?.total_answered_questions).toBe(outputRoundResultMock.round?.total_answered_questions)
+    expect(output.round?.total_correct_answers).toBe(outputRoundResultMock.round?.total_correct_answers)
+    expect(output.round?.total_questions).toBe(outputRoundResultMock.round?.total_questions)
+  })
 })
