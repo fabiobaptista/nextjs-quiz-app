@@ -74,19 +74,19 @@ describe('Test Load Round Use Case', () => {
     expect(output.round?.questions[0].options[0].label).toBe(outputCategoriesMock.round?.questions[0].options[0].label)
   })
 
-  // test('should returns empty when not create round', async () => {
-  //   const httpClient = httpClientMock()
-  //   jest.spyOn(httpClient, 'request')
-  //     .mockReturnValue(Promise.resolve({
-  //       statusCode: 200,
-  //       body: {}
-  //     }))
+  test('should returns empty when not create round', async () => {
+    const httpClient = httpClientMock()
+    jest.spyOn(httpClient, 'request')
+      .mockReturnValue(Promise.resolve({
+        statusCode: 200,
+        body: {}
+      }))
 
-  //   const input: InputCreateRoundDto = inputRoundMock
-  //   const usecase = new CreateRoundUseCase('http://fake.com', httpClient)
+      const input: InputLoadRoundDto = inputRoundMock
+      const usecase = new LoadRoundUseCase('http://fake.com', httpClient)
+  
+      const output: OutputLoadRoundDto = await usecase.execute(input)
 
-  //   const output: OutputCreateRoundDto = await usecase.execute(input)
-
-  //   expect(output).toStrictEqual({})
-  // })
+      expect(output).toStrictEqual({})
+  })
 })
