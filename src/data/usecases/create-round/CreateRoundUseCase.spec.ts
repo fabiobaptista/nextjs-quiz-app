@@ -4,10 +4,8 @@ import CreateRoundUseCase from './CreateRoundUseCase'
 
 
 const inputRoundMock: InputCreateRoundDto = {
-  round: {
     playerName: 'Player 1',
     categoryId: 1
-  }
 }
 
 const questions1Mock: OutpuCreateRoundQuestionDto = {
@@ -39,7 +37,7 @@ const questions2Mock: OutpuCreateRoundQuestionDto = {
 const outputCategoriesMock: OutputCreateRoundDto = {
   round: {
     id: 1,
-    player_name: inputRoundMock.round.playerName,
+    player_id: 1,
     questions: [
       questions1Mock,
       questions2Mock
@@ -69,7 +67,7 @@ describe('Test Create Round Use Case', () => {
 
     expect(output).toBeDefined()
     expect(output.round?.id).toBe(outputCategoriesMock.round?.id)
-    expect(output.round?.player_name).toBe(outputCategoriesMock.round?.player_name)
+    expect(output.round?.player_id).toBe(outputCategoriesMock.round?.player_id)
     expect(output.round?.questions.length).toBe(outputCategoriesMock.round?.questions.length)
     expect(output.round?.questions[0].id).toBe(outputCategoriesMock.round?.questions[0].id)
     expect(output.round?.questions[0].description).toBe(outputCategoriesMock.round?.questions[0].description)

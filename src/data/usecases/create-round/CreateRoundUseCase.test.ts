@@ -4,10 +4,8 @@ import CreateRoundUseCase from './CreateRoundUseCase'
 import 'isomorphic-fetch'
 
 const inputRoundMock: InputCreateRoundDto = {
-  round: {
     playerName: 'Fabio',
     categoryId: 3
-  }
 }
 
 const urlApi  = `https://test-quiz-app-backend.herokuapp.com/rounds`
@@ -33,7 +31,7 @@ describe('Test Create Round Use Case', () => {
     const input: InputCreateRoundDto = inputRoundMock
     const usecase = new CreateRoundUseCase(urlApi, httpClient)
 
-    input.round.categoryId = 0
+    input.categoryId = 0
 
     const output: OutputCreateRoundDto = await usecase.execute(input)
 
