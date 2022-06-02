@@ -11,7 +11,7 @@ export interface OutputCreateRoundDto {
 
 export interface OutputCreateRoundRoundDto {
   id: number
-  player_name: string
+  player_id: number
   questions: OutpuCreateRoundQuestionDto[]
 }
 

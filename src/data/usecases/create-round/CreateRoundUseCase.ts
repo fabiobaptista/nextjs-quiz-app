@@ -13,12 +13,15 @@ export default class CreateRoundUsecase {
     const httpResponse = await this.httpClient.request({
       url: this.url,
       method: 'post',
-      body: {
-        round: {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+         round: {
           player_name: input.round.playerName,
           category_id: input.round.categoryId
         }
-      }
+      })
     })
 
     const result = httpResponse.body?.round
