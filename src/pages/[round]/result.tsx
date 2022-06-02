@@ -9,6 +9,7 @@ import styles from '@/styles/pages/result.module.scss'
 import { useEffect, useState } from 'react'
 import { RoundResult } from '@/domain/round'
 import UseCasesFactory from '@/factory/UseCasesFactory'
+import Chart from '@/components/Chart'
 
 const loadRoundResultUseCase = UseCasesFactory.createLoadRoundResult()
 
@@ -73,12 +74,14 @@ const Result: NextPage = () => {
         <div className={`${styles.cardHeader}` }>
           Resultado
         </div>
+
         <div className={styles.cardResult}>
-          <div>{result?.totalCorrectAnswers}/{result?.totalQuestions}</div>
-          {buildStarts()}
-          {/* <Image className='star' src="/star-empty.png" alt="star" width="50" height="50" />
-          <Image className='star' src="/star-empty.png" alt="star" width="50" height="50" /> */}
+          <Chart total={result?.totalQuestions || 0} correct={result?.totalCorrectAnswers || 0}/>
+          <span className="stars">
+            { buildStarts() }
+          </span>
         </div>
+
         <div className={styles.cardFooter}>
           <button onClick={() => route.push('/')}>Fim</button>
         </div>

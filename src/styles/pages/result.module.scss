@@ -11,13 +11,14 @@
 
 .cardResult {
   flex: 1;
-  @include flexbox(); 
+  @include flexbox(column); 
   justify-content: center;
   align-items: center;
   padding: 2rem .5rem;
 
-  & > .star {
-    margin: 0 1rem;
+  span {
+    @include flexbox(); 
+    margin-top: 2rem;
   }
 }
 
@@ -31,7 +32,7 @@
     padding: .5rem 2rem;
     margin: .5rem 0;
     background-color: colors(secondary);
-    color: #fff;
+    color: $bg-content;
     border: 1px solid colors(secondary);
     border-radius: 5px;
   }
