@@ -7,9 +7,10 @@ import { NextPage } from 'next/types'
 import styles from '@/styles/pages/questions.module.scss'
 import { useEffect, useState } from 'react'
 import UseCasesFactory from '@/factory/UseCasesFactory'
-import { Question } from '@/domain/round'
+import { Answer, Question } from '@/domain/round'
 
 const loadRoundUseCase = UseCasesFactory.createLoadRound()
+const saveAnswerUseCase = UseCasesFactory.createSaveAnswer()
 
 const Questions: NextPage = () => {
   const route = useRouter()
@@ -18,6 +19,7 @@ const Questions: NextPage = () => {
   const [msg, setMsg] = useState('')
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [questions, setQuestions] = useState<Question[]>([])
+  const [answers, setAnswers] = useState<Answer[]>([])
 
   // Mounted
   useEffect(() => {
@@ -30,8 +32,7 @@ const Questions: NextPage = () => {
         route.push('/')
       }
       const data = await loadRoundUseCase.execute({ roundId: +roundId })
-      
-      console.log(data)
+
       const questions: Question[] = data.round?.questions.map(q => ({
         id: q.id,
         description: q.description,
@@ -52,11 +53,27 @@ const Questions: NextPage = () => {
     })()
   }, [])
 
-  function handleAnswerQuestion(optionId: number) {
+  async function handleAnswerQuestion(questionId:number, optionId: number) {
     updateIsBusy(true)
-    console.log(optionId)
+    
     if(currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1)
+      const resul = await saveAnswerUseCase.execute({
+        roundId: context.roundId,
+        questionId,
+        optionId
+      })
+      
+      if(resul.answer) {
+        
+        const answer: Answer = {
+          id: resul.answer.id,
+          questionId: resul.answer.question_id,
+          optionId: resul.answer.option_id,
+          correct: resul.answer.correct
+        }
+        setAnswers(a => [...a, answer])
+        setCurrentQuestion(q => q + 1)
+      }
     } else {
       route.push('/result')
     }
@@ -68,15 +85,14 @@ const Questions: NextPage = () => {
       <Modal className='alignItemsStretch'>
         <div className={`${styles.cardHeader}` }>
           <div>{currentQuestion+1}/{questions.length}</div>
-          <div>Rodada: {route.query.round}</div>
-          <div>Certas: 0</div>
+          <div>Certas: {answers.filter(a => a.correct).length}</div>
         </div>
         <div className={styles.cardQuestion}>
           {questions[currentQuestion]?.description}
         </div>
         <div className={styles.cardAnswers}>
           {questions[currentQuestion]?.options.map(o => (
-            <button key={o.id} onClick={() => handleAnswerQuestion(o.id) }>{o.label}</button>
+            <button key={o.id} onClick={() => handleAnswerQuestion(questions[currentQuestion]?.id, o.id) }>{o.label}</button>
           ))}
           
         </div>
