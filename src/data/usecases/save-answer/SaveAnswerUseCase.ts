@@ -24,7 +24,7 @@ export default class SaveAnswerUseCase {
     })
 
     const result = httpResponse.body?.answer
-    console.log(httpResponse.body)
+
     if(result) {
       return {
         answer: {

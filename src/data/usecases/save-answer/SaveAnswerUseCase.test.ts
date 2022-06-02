@@ -43,20 +43,21 @@ describe('Test Create Round Use Case', () => {
 
     const output: OutputSaveAnswerDto = await usecase.execute(input)
 
-    console.log(output)
     expect(output.answer?.id).toBeGreaterThan(0)
     expect(output.answer?.option_id).toBe(round.round.questions[0].options[0].id)
   })
 
-  // test('should not create a round', async () => {
+  test('should not create a round', async () => {
 
-  //   const input: InputCreateRoundDto = inputRoundMock
-  //   const usecase = new CreateRoundUseCase(urlApi, httpClient)
+    const input: InputSaveAnswerDto = { 
+      roundId: 0,
+      questionId: 0,
+      optionId: 0
+    }
+    const usecase = new SaveAnswerUseCase(urlApi, httpClient)
 
-  //   input.categoryId = 0
+    const output: OutputSaveAnswerDto = await usecase.execute(input)
 
-  //   const output: OutputCreateRoundDto = await usecase.execute(input)
-
-  //   expect(output).toStrictEqual({})
-  // })
+    expect(output).toStrictEqual({})
+  })
 })
