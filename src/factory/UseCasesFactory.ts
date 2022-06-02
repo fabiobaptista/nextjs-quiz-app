@@ -1,5 +1,6 @@
 import CreateRoundUseCase from '@/data/usecases/create-round/CreateRoundUseCase'
 import LoadCategoriesUseCase from '@/data/usecases/load-categories/LoadCategoriesUseCase'
+import LoadRoundResultUseCase from '@/data/usecases/load-round-result/LoadRoundResultUseCase'
 import LoadRoundUseCase from '@/data/usecases/load-round/LoadRoundUseCase'
 import SaveAnswerUseCase from '@/data/usecases/save-answer/SaveAnswerUseCase'
 import HttpClientFactory from './HttpClientFactory'
@@ -28,6 +29,13 @@ export default class UseCasesFactory {
 
   static createSaveAnswer = (): SaveAnswerUseCase => {
     return new SaveAnswerUseCase(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/rounds`,
+      HttpClientFactory.Axios()
+    )
+  }
+
+  static createLoadRoundResult = (): LoadRoundResultUseCase => {
+    return new LoadRoundResultUseCase(
       `${process.env.NEXT_PUBLIC_BASE_URL}/rounds`,
       HttpClientFactory.Axios()
     )

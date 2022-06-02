@@ -27,6 +27,7 @@ const Questions: NextPage = () => {
       updateIsBusy(true)
 
       // ensure that round id is provided
+      // TODO - candidate for hook
       const roundId = route.query.round || ''
       if(!roundId && !isNaN(+roundId)) {
         route.push('/')
@@ -75,7 +76,7 @@ const Questions: NextPage = () => {
         setCurrentQuestion(q => q + 1)
       }
     } else {
-      route.push('/result')
+      route.push(`/${context.roundId}/result`)
     }
     updateIsBusy(false)
   }
