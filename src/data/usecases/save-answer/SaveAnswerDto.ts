@@ -1,10 +1,11 @@
 export interface InputSaveAnswerDto {
+    roundId: number
     questionId: number
     optionId: number
 }
 
 export interface OutputSaveAnswerDto {
-  round?: OutputSaveAnswerRoundDto
+  answer?: OutputSaveAnswerAnswerDto
 }
 
 export interface OutputSaveAnswerRoundDto {

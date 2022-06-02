@@ -10,28 +10,28 @@ export default class SaveAnswerUseCase {
 
   async execute (input: InputSaveAnswerDto): Promise<OutputSaveAnswerDto> {
     const httpResponse = await this.httpClient.request({
-      url: this.url,
+      url: `${this.url}/${input.roundId}/answers`,
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-         asnwer: {
+         answer: {
           question_id: input.questionId,
           option_id: input.optionId
         }
       })
     })
 
-    const result = httpResponse.body?.round
-
+    const result = httpResponse.body?.answer
+    console.log(httpResponse.body)
     if(result) {
       return {
-        round: {
+        answer: {
           id: result.id,
-          player_id: result.player_id,
-          questions: result.questions,
-          answers: result.answers
+          question_id: result.question_id,
+          option_id: result.option_id,
+          correct: result.correct
         }
       }
     }
