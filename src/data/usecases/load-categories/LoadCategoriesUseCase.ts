@@ -1,5 +1,5 @@
 import { HttpClient } from '@/data/protocols/Http'
-import Category from '@/domain/categories/Categories'
+import { Category } from '@/domain/category'
 import { InputLoadCategoriesDto, LoadCategoryDto, OutputLoadCategoriesDto } from './LoadCategoriesDto'
 
 export default class LoadCategoriesUseCase {

@@ -19,13 +19,14 @@ export default class FetchHttpClient implements HttpClient {
           body: data.body
         }
       )
+
       switch(response.status) {
         case 200:
         case 201:  
           body = await response.json()
         break
         case 404: 
-          body = response.json()
+          body = ''
         break
         default:
           body = ''

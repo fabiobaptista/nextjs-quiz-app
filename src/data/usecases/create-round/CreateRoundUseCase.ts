@@ -1,8 +1,7 @@
 import { HttpClient } from '@/data/protocols/Http'
-import Category from '@/domain/categories/Categories'
 import { InputCreateRoundDto, OutputCreateRoundDto } from './CreateRoundDto'
 
-export default class CreateRoundUsecase {
+export default class CreateRoundUseCase {
   
   constructor (
     private readonly url: string,
