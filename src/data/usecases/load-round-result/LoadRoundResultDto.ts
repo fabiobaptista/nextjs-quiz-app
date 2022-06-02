@@ -1,4 +1,6 @@
-export interface InputLoadRoundResultDto {}
+export interface InputLoadRoundResultDto {
+  roundId: number
+}
 
 export interface OutputLoadRoundResultDto {
   round?: {

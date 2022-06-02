@@ -10,7 +10,7 @@ export default class LoadRoundResultUseCase {
 
   async execute (input: InputLoadRoundResultDto): Promise<OutputLoadRoundResultDto> {
     const httpResponse = await this.httpClient.request({
-      url: this.url,
+      url: `${this.url}/${input.roundId}/result`,
       method: 'get'
     })
 
