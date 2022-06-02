@@ -21,7 +21,7 @@ const Questions: NextPage = () => {
           Petinha por que você matou o Curirim?
         </div>
         <div className={styles.cardAnswers}>
-          <button>resp 1</button>
+          <button onClick={() => route.push('/result')}>resp 1</button>
           <button>resp 2</button>
           <button>resp 3</button>
           <button>resp 4</button>

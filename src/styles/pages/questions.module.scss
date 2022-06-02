@@ -4,24 +4,20 @@
 
 .cardHeader {
   @include flexbox(); 
-  justify-content: center;
-  font-size: 1.1rem;
+  justify-content: space-between;
   padding: .5rem .8rem;
 }
 
-.cardResult {
+.cardQuestion {
   flex: 1;
   @include flexbox(); 
   justify-content: center;
   align-items: center;
   padding: 2rem .5rem;
-
-  & > .star {
-    margin: 0 1rem;
-  }
+  font-weight: bold;
 }
 
-.cardFooter {
+.cardAnswers {
   flex: 2;
   @include flexbox(column); 
   justify-content: center;
