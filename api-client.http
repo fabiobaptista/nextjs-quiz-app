@@ -1,0 +1,18 @@
+@hostname = https://test-quiz-app-backend.herokuapp.com
+@host = {{hostname}}
+@contentType = application/json
+
+GET {{host}}/categories HTTP/1.1
+content-type: {{contentType}}
+
+### Round
+# @name round
+POST {{host}}/rounds HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "round": {
+    "player_name": "fabio",
+    "category_id": 5
+  }
+}
