@@ -5,12 +5,14 @@
   "scripts": {
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "npm test -- --watch",
+    "jest:clearCache": "jest --clearCache",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "isomorphic-fetch": "^3.0.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
