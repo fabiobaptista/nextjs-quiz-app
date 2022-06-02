@@ -12,7 +12,6 @@ describe('Test Integration Load Categories Use Case', () => {
     const usecase = new LoadCategoriesUseCase(`${urlApi}aaa`, httpClient)
 
     const output: OutputLoadCategoriesDto = await usecase.execute(input)
-
     expect(output.categories.length).toBe(0)
   })
 
