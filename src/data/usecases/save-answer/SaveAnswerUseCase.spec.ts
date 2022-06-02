@@ -3,6 +3,7 @@ import { InputSaveAnswerDto, OutpuSaveAnswerQuestionDto, OutputSaveAnswerAnswerD
 import SaveAnswerUseCase from './SaveAnswerUseCase'
 
 const inputRoundMock: InputSaveAnswerDto = {
+    roundId: 1,
     questionId: 1,
     optionId: 1
 }
