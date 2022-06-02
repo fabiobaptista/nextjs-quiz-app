@@ -2,10 +2,10 @@ import LoadCategoriesUseCase from '@/data/usecases/load-categories/LoadCategorie
 import HttpClientFactory from './HttpClientFactory'
 
 export default class UseCasesFactory {
-  static createLoadCategoriesUseCase = (): LoadCategoriesUseCase => {
+  static createLoadCategories = (): LoadCategoriesUseCase => {
     return new LoadCategoriesUseCase(
-      `${process.env.NEXT_PUBLIC_BASE_URL}categories`,
-      HttpClientFactory.Fetch()
+      `${process.env.NEXT_PUBLIC_BASE_URL}/categories`,
+      HttpClientFactory.Axios()
     )
   }
 }
