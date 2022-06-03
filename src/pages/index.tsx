@@ -86,11 +86,11 @@ const Home: NextPage = () => {
       <Modal className='alignItemscenter justifyContentCenter'>
         {msg && <Message message={msg}/>}
         <div className={styles.fields}>
-          <div className='inputForm'>
+          <div data-testid="input-player" className='inputForm'>
             <span>Jogador:</span>
             <input type='text' value={name} onChange={e => setName(e.target.value)}/>
           </div>
-          <div className='inputForm'>
+          <div data-testid="input-category" className='inputForm'>
             <span>Categoria:</span>
             <select
               value={category}
@@ -104,7 +104,7 @@ const Home: NextPage = () => {
             </select>
           </div>
         </div>
-        <button className='button' onClick={startGame}>Jogar</button>
+        <button data-testid="btn-start" className='button' onClick={startGame}>Jogar</button>
       </Modal>
     </MainContainer>
   )
