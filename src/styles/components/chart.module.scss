@@ -3,46 +3,33 @@
 @import '../functions';
 
 .chart {
-  display: flex;
+  @include flexbox();
   align-items: center;
   justify-content: center;
-  width: 200px;
-  height: 200px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
-  // background: conic-gradient(
-  //   $bg-content 0deg 150deg,
-  //   colors(secondary) 150deg 360deg
-  // );
-
-  span {
-    position: absolute;
-    top: 213px;
-    width: 185px;
-    height: 185px;
-    border-radius: 50%;
-    background: colors(secondary);
-    span {
-      position: absolute;
-      top: -27px;
-      left: 5px;
-      width: 175px;
-      height: 175px;
-      border-radius: 50%;
-      background: $bg-content;
-    };
-  };
-
 
   div {
-    display: flex;
+    @include flexbox();
     align-items: center;
     justify-content: center;
-    width: 140px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
-    background: $bg-content;
-    font-size: 1.5rem;
-    font-weight: bold;
-    z-index: 500;
-  }
+
+    div {
+      @include flexbox();
+      align-items: center;
+      justify-content: center;
+    
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: $bg-content;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 500;
+    };
+  };
 }
