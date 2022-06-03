@@ -1,7 +1,8 @@
 import { useAppContext } from '@/context/ContextProvider'
-import styles from '@/styles/components/main-container.module.scss'
 import { useEffect, useState } from 'react'
 import Overlay from './Overlay'
+
+import styles from '@/styles/components/main-container.module.scss'
 
 type MainContainerProps = {
   children: React.ReactNode

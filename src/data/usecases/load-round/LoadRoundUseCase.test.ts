@@ -1,8 +1,7 @@
 import FetchHttpClient from '../../../infra/http/FetchHttpClient'
-import { HttpClient } from '@/data/protocols/Http'
-import { InputLoadRoundDto, OutpuLoadRoundQuestionDto, OutputLoadRoundDto } from './LoadRoundDto'
-import LoadRoundUseCase from './LoadRoundUseCase'
 import 'isomorphic-fetch'
+import { InputLoadRoundDto, OutputLoadRoundDto } from './LoadRoundDto'
+import LoadRoundUseCase from './LoadRoundUseCase'
 
 const urlApi  = `https://test-quiz-app-backend.herokuapp.com/rounds`
 const httpClient = new FetchHttpClient()

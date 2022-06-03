@@ -1,16 +1,16 @@
-import MainContainer from '@/components/MainContainer'
-import Modal from '@/components/Modal'
-import { useAppContext } from '@/context/ContextProvider'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
-
-
-import styles from '@/styles/pages/result.module.scss'
 import { useEffect, useState } from 'react'
+
+import { useAppContext } from '@/context/ContextProvider'
 import { RoundResult } from '@/domain/round'
 import UseCasesFactory from '@/factory/UseCasesFactory'
+import MainContainer from '@/components/MainContainer'
+import Modal from '@/components/Modal'
 import Chart from '@/components/Chart'
 import Stars from '@/components/Stars'
+
+import styles from '@/styles/pages/result.module.scss'
 
 const loadRoundResultUseCase = UseCasesFactory.createLoadRoundResult()
 

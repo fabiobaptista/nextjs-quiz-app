@@ -1,4 +1,5 @@
 import Image from 'next/image'
+
 import styles from '@/styles/components/stars.module.scss'
 
 type StarsProps = {

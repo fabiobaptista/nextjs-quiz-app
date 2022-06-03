@@ -14,7 +14,7 @@ export default interface DataContext {
 export const DataContextInitialValues: DataContext = {
   isBusy: false,
   name: '',
-  category: '1',
+  category: '',
   playerId: 0,
   roundId: 0,
   updateIsBusy: () => ({}),

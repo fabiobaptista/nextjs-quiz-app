@@ -1,13 +1,14 @@
-import MainContainer from '@/components/MainContainer'
-import Modal from '@/components/Modal'
-import { useAppContext } from '@/context/ContextProvider'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
+import { useEffect, useState } from 'react'
+
+import { useAppContext } from '@/context/ContextProvider'
+import { Answer, Question } from '@/domain/round'
+import UseCasesFactory from '@/factory/UseCasesFactory'
+import MainContainer from '@/components/MainContainer'
+import Modal from '@/components/Modal'
 
 import styles from '@/styles/pages/questions.module.scss'
-import { useEffect, useState } from 'react'
-import UseCasesFactory from '@/factory/UseCasesFactory'
-import { Answer, Question } from '@/domain/round'
 
 const loadRoundUseCase = UseCasesFactory.createLoadRound()
 const saveAnswerUseCase = UseCasesFactory.createSaveAnswer()
@@ -16,7 +17,6 @@ const Questions: NextPage = () => {
   const route = useRouter()
   const {updateIsBusy, ...context} = useAppContext()
 
-  const [msg, setMsg] = useState('')
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [questions, setQuestions] = useState<Question[]>([])
   const [answers, setAnswers] = useState<Answer[]>([])
@@ -95,7 +95,6 @@ const Questions: NextPage = () => {
           {questions[currentQuestion]?.options.map(o => (
             <button key={o.id} onClick={() => handleAnswerQuestion(questions[currentQuestion]?.id, o.id) }>{o.label}</button>
           ))}
-          
         </div>
       </Modal>
     </MainContainer>

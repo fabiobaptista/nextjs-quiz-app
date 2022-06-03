@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { Category } from '@/domain/category'
-import { Round, Question } from '../domain/round'
 
 import { useAppContext } from '@/context/ContextProvider'
+import { Round } from '@/domain/round'
+import { Category } from '@/domain/category'
+import UseCasesFactory from '@/factory/UseCasesFactory'
 import MainContainer from '@/components/MainContainer'
 import Modal from '@/components/Modal'
 import Message from '@/components/Message'
 
-import UseCasesFactory from '@/factory/UseCasesFactory'
+import styles from '@/styles/pages/index.module.scss'
 
 const loadGategoriesUseCase = UseCasesFactory.createLoadCategories()
 const createRoundUsesCase = UseCasesFactory.createCreateRound()
@@ -74,7 +75,6 @@ const Home: NextPage = () => {
       
       context.updatePlayer(round.playerId)
       context.updateRound(round.id)
-      console.log(round)
       route.push(`${round.id}/questions`)
     } else {
       setMsg('Não foi possível iniciar o Quiz')
@@ -85,22 +85,24 @@ const Home: NextPage = () => {
     <MainContainer>
       <Modal className='alignItemscenter justifyContentCenter'>
         {msg && <Message message={msg}/>}
-        <div className='inputForm'>
-          <span>Jogador:</span>
-          <input type='text' value={name} onChange={e => setName(e.target.value)}/>
-        </div>
-        <div className='inputForm'>
-          <span>Categoria:</span>
-          <select
-            value={category}
-            onChange={e => setCategory(e.target.value)}>
-            <>
-              <option value='' key='0'>Selecione uma Categoria</option>
-              {categories.map(c => ( 
-                <option value={c.id} key={c.id}>{c.name}</option> 
-              ))}
-            </>
-          </select>
+        <div className={styles.fields}>
+          <div className='inputForm'>
+            <span>Jogador:</span>
+            <input type='text' value={name} onChange={e => setName(e.target.value)}/>
+          </div>
+          <div className='inputForm'>
+            <span>Categoria:</span>
+            <select
+              value={category}
+              onChange={e => setCategory(e.target.value)}>
+              <>
+                <option value='' key='0'>Selecione uma Categoria</option>
+                {categories.map(c => ( 
+                  <option value={c.id} key={c.id}>{c.name}</option> 
+                ))}
+              </>
+            </select>
+          </div>
         </div>
         <button className='button' onClick={startGame}>Jogar</button>
       </Modal>
