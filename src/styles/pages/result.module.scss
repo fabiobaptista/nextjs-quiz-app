@@ -7,6 +7,7 @@
   justify-content: center;
   font-size: 1.1rem;
   padding: .5rem .8rem;
+  font-weight: bold;
 }
 
 .cardResult {
@@ -14,12 +15,7 @@
   @include flexbox(column); 
   justify-content: center;
   align-items: center;
-  padding: 2rem .5rem;
-
-  span {
-    @include flexbox(); 
-    margin-top: 2rem;
-  }
+  padding: 1rem .5rem;
 }
 
 .cardFooter {

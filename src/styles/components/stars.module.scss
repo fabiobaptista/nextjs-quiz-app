@@ -1,0 +1,8 @@
+@import '../mixins/flexbox';
+@import '../variables';
+@import '../functions';
+
+.stars {
+  @include flexbox(); 
+  margin-top: 1rem;
+}

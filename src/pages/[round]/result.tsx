@@ -3,13 +3,14 @@ import Modal from '@/components/Modal'
 import { useAppContext } from '@/context/ContextProvider'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
-import Image from 'next/image'
+
 
 import styles from '@/styles/pages/result.module.scss'
 import { useEffect, useState } from 'react'
 import { RoundResult } from '@/domain/round'
 import UseCasesFactory from '@/factory/UseCasesFactory'
 import Chart from '@/components/Chart'
+import Stars from '@/components/Stars'
 
 const loadRoundResultUseCase = UseCasesFactory.createLoadRoundResult()
 
@@ -49,25 +50,7 @@ const Result: NextPage = () => {
     })()
   }, [])
 
-  function buildStarts() {
-    const starts = []
-    const total = result?.totalQuestions || 0
-    const correct = result?.totalCorrectAnswers || 0
-
-    for(let i = 0; i < total; i++) {
-      starts.push(
-        <div key={i} className={styles.starts}>
-          <Image
-            src= { i >= correct ? "/images/star-empty.png" : "/images/star-filled.png" }
-            width={50}
-            height={50}
-            alt="star"
-          />
-        </div>
-      )
-    }
-    return starts
-  }
+  
   return (
     <MainContainer>
       <Modal className='alignItemsStretch'>
@@ -77,9 +60,7 @@ const Result: NextPage = () => {
 
         <div className={styles.cardResult}>
           <Chart total={result?.totalQuestions || 0} correct={result?.totalCorrectAnswers || 0}/>
-          <span className="stars">
-            { buildStarts() }
-          </span>
+          <Stars  total={result?.totalQuestions || 0} correct={result?.totalCorrectAnswers || 0}/>
         </div>
 
         <div className={styles.cardFooter}>
